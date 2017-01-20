@@ -1,0 +1,28 @@
+--- # My first Play book
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+   playbook_version: 0.1b
+  vars_files:
+   - conf/copyright.yml
+   - conf/webdefaults.yml
+  vars_prompt:
+   - name: pkg_name
+     prompt: Please enter the package name to be installed
+     default: telnet
+     private: no
+  tasks:
+   - name: Install Apache webs server
+     action: yum name=httpd state=installed
+     notify: restart service
+   - name: Install the indicated web browser
+     action: yum name={{pkg_name}} state=installed 
+  handlers:
+    - name: restart service
+      action: service name=httpd state=restarted
+     
+
+

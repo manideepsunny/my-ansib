@@ -1,0 +1,6 @@
+--- # LOCAL ACION
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: install LYNX
+     yum: pkg=lynx state=latest

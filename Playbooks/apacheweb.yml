@@ -1,0 +1,5 @@
+- hosts: apacheweb
+  tasks:
+    - name: Install Lynx on App Servers
+      yum: pkg=elinks state=installed update_cache=true
+
