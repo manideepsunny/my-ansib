@@ -1,0 +1,17 @@
+--- # THIS IS THE WHEN PLAYBOOK
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  vars:
+   playbook_type: conditional example
+  vars_files:
+   - conf/copyright.yml
+   - conf/webdefaults.yml
+  tasks:
+   - name: install APACHE to specific distribution debian
+     command: apt-get -y install apache2
+     when: ansible_os_family == "Debian"
+   - name: install APACHE to redhat
+     command: yum install -y httpd
+     when: ansible_os_family == "RedHat"

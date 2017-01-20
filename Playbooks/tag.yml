@@ -1,0 +1,18 @@
+--- # TAG FUNCTIONALITY
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+   - name: install telnet
+     yum: pkg={{ item }} state=latest
+     with_items:
+       - telnet
+       - lynx
+     tags:
+       - packages
+   - name: verify telnet
+     raw: yum list installed | grep telnet > /home/test/pkg.log
+     tags:
+       - verification

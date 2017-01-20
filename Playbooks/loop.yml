@@ -1,0 +1,13 @@
+--- # LOOP PLAYBOOK
+- hosts: apacheweb
+  user: test
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+   - name: Add a list of members
+     user: name={{ item }} state=present
+     with_items:
+       - user1
+       - user2
+       - user3
